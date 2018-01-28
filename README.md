@@ -2,11 +2,6 @@
 
 Voronoi noise, packed for glslify
 
-![example output](https://i.imgur.com/0i4AeaX.png)
-![example output](https://i.imgur.com/sTFMgzv.png)
-
-
-
 usage: 
 ```glsl
 precision mediump float;
@@ -23,3 +18,6 @@ void main() {
 
 Implementations from Shawn Lawson:
 https://github.com/shawnlawson/The_Force/blob/b28befa00fc8c2c128945ee36c55df4e1bb8416d/shaders/header.frag#L186-L226
+
+![example output](https://i.imgur.com/0i4AeaX.png)
+![example output](https://i.imgur.com/sTFMgzv.png)
