@@ -27,12 +27,10 @@ vec3 voronoi3d(const in vec3 x) {
         vec3 r = vec3(b) - f + hash(p + b);
         float d = dot(r, r);
 
-        if (d < res.x) {
-          id = dot(p + b, vec3(1.0, 57.0, 113.0));
-          res = vec2(d, res.x);
-        } else if (d < res.y) {
-          res.y = d;
-        }
+        bool c = d < res.x;
+        id = c ? dot(p + b, vec3(1.0, 57.0, 113.0)) : id; 
+        res = c ? vec2(d, res.x) : 
+                    (d < res.y) ? vec2(res.x, d) : res;
       }
     }
   }
