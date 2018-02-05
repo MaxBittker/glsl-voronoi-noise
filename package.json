@@ -1,6 +1,6 @@
 {
   "name": "glsl-voronoi-noise",
-  "version": "1.0.1",
+  "version": "1.2.0",
   "description": "voronoi noise, glslify compatible",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
