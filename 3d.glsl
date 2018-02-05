@@ -8,11 +8,13 @@ vec2 rhash(vec2 uv) {
 }
 
 vec3 hash(vec3 p) {
-  return fract(sin(vec3(dot(p, vec3(1.0, 57.0, 113.0)),
-                        dot(p, vec3(57.0, 113.0, 1.0)),
-                        dot(p, vec3(113.0, 1.0, 57.0)))) *
-               43758.5453);
+  return fract(
+      sin(vec3(dot(p, vec3(1.0, 57.0, 113.0)), dot(p, vec3(57.0, 113.0, 1.0)),
+               dot(p, vec3(113.0, 1.0, 57.0)))) *
+      43758.5453);
 }
+
+vec4 when_gt(float x, float y) { return max(sign(x - y), 0.0); }
 
 vec3 voronoi3d(const in vec3 x) {
   vec3 p = floor(x);
@@ -27,16 +29,20 @@ vec3 voronoi3d(const in vec3 x) {
         vec3 r = vec3(b) - f + hash(p + b);
         float d = dot(r, r);
 
-        if (d < res.x) {
-          id = dot(p + b, vec3(1.0, 57.0, 113.0));
-          res = vec2(d, res.x);
-        } else if (d < res.y) {
-          res.y = d;
-        }
+        float cond = max(sign(res.x - d), 0.0);
+        float nCond = 1.0 - cond;
+
+        float cond2 = nCond * max(sign(res.y - d), 0.0);
+        float nCond2 = 1.0 - cond2;
+
+        id = (dot(p + b, vec3(1.0, 57.0, 113.0)) * cond) + (id * nCond);
+        res = vec2(d, res.x) * cond + res * nCond;
+
+        res.y = cond2 * d + nCond2 * res.y;
       }
     }
   }
 
   return vec3(sqrt(res), abs(id));
 }
-#pragma glslify: export(voronoi3d)
+#pragma glslify : export(voronoi3d)
