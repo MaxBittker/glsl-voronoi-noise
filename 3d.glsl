@@ -14,8 +14,6 @@ vec3 hash(vec3 p) {
       43758.5453);
 }
 
-vec4 when_gt(float x, float y) { return max(sign(x - y), 0.0); }
-
 vec3 voronoi3d(const in vec3 x) {
   vec3 p = floor(x);
   vec3 f = fract(x);
@@ -45,4 +43,5 @@ vec3 voronoi3d(const in vec3 x) {
 
   return vec3(sqrt(res), abs(id));
 }
-#pragma glslify : export(voronoi3d)
+
+#pragma glslify: export(voronoi3d)
